@@ -1,0 +1,14 @@
+{
+    "valid_user": {
+        "email": "rahul.sharma@example.com",
+        "password": "Rahul@123"
+    },
+    "invalid_user": {
+        "email": "invalid@example.com",
+        "password": "Wrong@123"
+    },
+    "admin_user": {
+        "email": "admin@shopsphere.example.com",
+        "password": "Admin@123"
+    }
+}
