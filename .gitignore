@@ -1,4 +1,6 @@
 .venv/
+node_modules/
+
 __pycache__/
 .pytest_cache/
 
@@ -7,5 +9,7 @@ __pycache__/
 reports/
 screenshots/
 traces/
+allure-results/
+allure-report/
 
 *.pyc

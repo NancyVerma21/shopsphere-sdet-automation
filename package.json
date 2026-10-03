@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "allure": "^3.20.0"
+  }
+}
