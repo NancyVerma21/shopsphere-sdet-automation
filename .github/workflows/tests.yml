@@ -15,6 +15,15 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
+    env:
+      BASE_URL: ${{ secrets.BASE_URL }}
+      DB_HOST: ${{ secrets.DB_HOST }}
+      DB_PORT: ${{ secrets.DB_PORT }}
+      DB_USER: ${{ secrets.DB_USER }}
+      DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+      DB_NAME: ${{ secrets.DB_NAME }}
+      SECRET_KEY: ${{ secrets.SECRET_KEY }}
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -33,13 +42,36 @@ jobs:
         run: |
           playwright install --with-deps chromium
 
-      - name: Run pytest with Allure results
+      - name: Wait for ShopSphere application
+        run: |
+          for i in {1..12}; do
+            if curl --fail --silent --show-error --location --max-time 20 "$BASE_URL" > /dev/null; then
+              echo "ShopSphere is reachable."
+              exit 0
+            fi
+            echo "ShopSphere is not ready yet. Waiting 10 seconds..."
+            sleep 10
+          done
+
+          echo "ShopSphere did not become reachable."
+          exit 1
+
+      - name: Run pytest
         run: |
           pytest -v --alluredir=allure-results
 
       - name: Upload Allure results
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: allure-results
           path: allure-results
+          if-no-files-found: warn
+
+      - name: Upload Playwright traces
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: playwright-traces
+          path: traces
+          if-no-files-found: warn
