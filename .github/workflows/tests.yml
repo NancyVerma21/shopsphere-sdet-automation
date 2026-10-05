@@ -12,7 +12,9 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
+  pages: write
+  id-token: write
 
 jobs:
   test:
@@ -80,35 +82,33 @@ jobs:
           path: TEST_EXECUTION_SUMMARY.md
           if-no-files-found: warn
 
-      - name: Load Allure history
-        if: always() && github.event_name != 'pull_request'
-        continue-on-error: true
-        uses: actions/checkout@v4
-        with:
-          ref: gh-pages
-          path: gh-pages
-
       - name: Build Allure report
-        if: always() && github.event_name != 'pull_request'
+        if: always()
         uses: simple-elf/allure-report-action@master
         with:
-          gh_pages: gh-pages
           allure_results: allure-results
+          allure_report: allure-report
           allure_history: allure-history
 
       - name: Upload Allure HTML report
-        if: always() && github.event_name != 'pull_request'
+        if: always()
         uses: actions/upload-artifact@v7
         with:
           name: allure-html-report
-          path: allure-history
+          path: allure-report
           if-no-files-found: warn
 
-      - name: Publish Allure report to GitHub Pages
-        if: always() && github.event_name != 'pull_request'
-        uses: peaceiris/actions-gh-pages@v4
+      - name: Configure GitHub Pages
+        if: always()
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        if: always()
+        uses: actions/upload-pages-artifact@v4
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_branch: gh-pages
-          publish_dir: allure-history
-          force_orphan: true
+          path: allure-report
+
+      - name: Deploy to GitHub Pages
+        if: always()
+        id: deployment
+        uses: actions/deploy-pages@v4
