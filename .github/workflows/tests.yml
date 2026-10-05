@@ -11,6 +11,9 @@ on:
 
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -49,6 +52,7 @@ jobs:
               echo "ShopSphere is reachable."
               exit 0
             fi
+
             echo "ShopSphere is not ready yet. Waiting 10 seconds..."
             sleep 10
           done
@@ -60,7 +64,7 @@ jobs:
         run: |
           pytest -v --alluredir=allure-results
 
-      - name: Upload Allure results
+      - name: Upload Allure raw results
         if: always()
         uses: actions/upload-artifact@v7
         with:
@@ -68,10 +72,42 @@ jobs:
           path: allure-results
           if-no-files-found: warn
 
-      - name: Upload Playwright traces
+      - name: Upload execution summary
         if: always()
         uses: actions/upload-artifact@v7
         with:
-          name: playwright-traces
-          path: traces
+          name: test-execution-summary
+          path: TEST_EXECUTION_SUMMARY.md
           if-no-files-found: warn
+
+      - name: Load Allure history
+        if: always() && github.event_name != 'pull_request'
+        continue-on-error: true
+        uses: actions/checkout@v4
+        with:
+          ref: gh-pages
+          path: gh-pages
+
+      - name: Build Allure report
+        if: always() && github.event_name != 'pull_request'
+        uses: simple-elf/allure-report-action@master
+        with:
+          gh_pages: gh-pages
+          allure_results: allure-results
+          allure_history: allure-history
+
+      - name: Upload Allure HTML report
+        if: always() && github.event_name != 'pull_request'
+        uses: actions/upload-artifact@v7
+        with:
+          name: allure-html-report
+          path: allure-history
+          if-no-files-found: warn
+
+      - name: Publish Allure report to GitHub Pages
+        if: always() && github.event_name != 'pull_request'
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: allure-history
