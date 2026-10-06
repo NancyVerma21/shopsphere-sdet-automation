@@ -198,6 +198,17 @@ shopsphere-sdet-automation/
 ├── tests/
 ├── utils/
 │
+├── shopsphere-manual-qa/
+│   ├── 01_Requirements/
+│   ├── 02_Test_Plan/
+│   ├── 03_Test_Scenarios/
+│   ├── 04_Test_Cases/
+│   ├── 05_Test_Data/
+│   ├── 06_RTM/
+│   ├── 07_Bug_Reports/
+│   ├── 08_Test_Execution/
+│   └── 09_Test_Summary/
+│
 ├── .env.example
 ├── .gitignore
 ├── conftest.py
@@ -391,21 +402,23 @@ No passwords or production credentials are stored in the repository.
 
 ---
 
-## Manual QA Companion
+## Manual QA Documentation
 
-The automation project is supported by a complete manual QA testing lifecycle covering:
+The automation framework is supported by a complete manual QA testing lifecycle covering requirements, planning, test design, test execution, traceability, and defect management.
 
-- Requirements / BRD
-- Test Plan
-- Test Scenarios
-- Detailed Test Cases
-- Test Data
-- Requirement Traceability Matrix
-- Bug Reports
-- Test Execution
-- Test Summary Report
+### QA Artifacts
 
-The manual QA artifacts form the testing foundation for the SDET automation framework.
+- [Business Requirements Document](./shopsphere-manual-qa/01_Requirements/BRD.md)
+- [Test Plan](./shopsphere-manual-qa/02_Test_Plan/TEST_PLAN.md)
+- [Test Scenarios](./shopsphere-manual-qa/03_Test_Scenarios/TEST_SCENARIOS.md)
+- [Test Cases](./shopsphere-manual-qa/04_Test_Cases/TEST_CASES.md)
+- [Test Data](./shopsphere-manual-qa/05_Test_Data/TEST_DATA.md)
+- [Requirement Traceability Matrix](./shopsphere-manual-qa/06_RTM/RTM.md)
+- [Bug Reports](./shopsphere-manual-qa/07_Bug_Reports/BUG_REPORTS.md)
+- [Test Execution Report](./shopsphere-manual-qa/08_Test_Execution/TEST_EXECUTION.md)
+- [Test Summary Report](./shopsphere-manual-qa/09_Test_Summary/TEST_SUMMARY.md)
+
+These artifacts provide the manual QA foundation for the automated UI, API, and database testing implemented in this project.
 
 ---
 
