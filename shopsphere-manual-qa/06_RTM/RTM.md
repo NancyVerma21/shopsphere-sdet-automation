@@ -1,0 +1,33 @@
+# ShopSphere — Requirement Traceability Matrix
+
+
+| Requirement | Scenarios | Test Cases | Defect Mapping |
+|---|---|---|---|
+| BR-001 | TS-001, TS-002, TS-003, TS-004 | TC-001, TC-002, TC-003, TC-004 | BUG-010 |
+| BR-002 | TS-005, TS-006, TS-007, TS-008 | TC-005, TC-006, TC-007, TC-008 | BUG-007 |
+| BR-003 | TS-009, TS-010 | TC-009, TC-010 | BUG-008 |
+| BR-004 | TS-011, TS-012, TS-013 | TC-011, TC-012, TC-013 | — |
+| BR-005 | TS-014, TS-015, TS-016, TS-057 | TC-014, TC-015, TC-016, TC-057 | BUG-004 |
+| BR-006 | TS-017, TS-018, TS-058 | TC-017, TC-018, TC-058 | — |
+| BR-007 | TS-019, TS-020, TS-059 | TC-019, TC-020, TC-059 | BUG-003 |
+| BR-008 | TS-021, TS-022, TS-060 | TC-021, TC-022, TC-060 | — |
+| BR-009 | TS-023, TS-024, TS-061 | TC-023, TC-024, TC-061 | BUG-002 |
+| BR-010 | TS-025, TS-026 | TC-025, TC-026 | BUG-002 |
+| BR-011 | TS-027, TS-028, TS-029, TS-030 | TC-027, TC-028, TC-029, TC-030 | BUG-005, BUG-019 |
+| BR-012 | TS-031, TS-032 | TC-031, TC-032 | BUG-019 |
+| BR-013 | TS-033, TS-034, TS-062 | TC-033, TC-034, TC-062 | BUG-019 |
+| BR-014 | TS-035, TS-063 | TC-035, TC-063 | BUG-019 |
+| BR-015 | TS-036, TS-037, TS-038 | TC-036, TC-037, TC-038 | BUG-012 |
+| BR-016 | TS-039, TS-040, TS-041, TS-042 | TC-039, TC-040, TC-041, TC-042 | BUG-006, BUG-015, BUG-020 |
+| BR-017 | TS-043, TS-044 | TC-043, TC-044 | — |
+| BR-018 | TS-045 | TC-045 | — |
+| BR-019 | TS-046 | TC-046 | BUG-009 |
+| BR-020 | TS-047, TS-048 | TC-047, TC-048 | BUG-014 |
+| BR-021 | TS-049, TS-050, TS-051, TS-052, TS-053, TS-054 | TC-049, TC-050, TC-051, TC-052, TC-053, TC-054 | — |
+| BR-022 | TS-055, TS-056 | TC-055, TC-056 | — |
+
+## Traceability Flow
+
+```text
+Requirement → Scenario → Test Case → Execution → Defect → Retest/Regression
+```
